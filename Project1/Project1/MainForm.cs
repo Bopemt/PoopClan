@@ -94,23 +94,6 @@ namespace Project1
             }
         }
 
-        private void Refresh(object sender, EventArgs e)
-        {
-            switch (Tabform.SelectedIndex)
-            {
-                case 0:
-                    UpdatePD();
-                    break;
-                case 1:
-                    UpdateComp();
-                    break;
-                case 2:
-                    UpdateEmployee();
-                    break;
-            }
-            
-        }
-
         private void Add(object sender, EventArgs e)
         {
             switch (Tabform.SelectedIndex)
