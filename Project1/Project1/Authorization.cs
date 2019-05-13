@@ -21,17 +21,17 @@ namespace Project1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SampleContext sc = new SampleContext();
+            SampleContext bd = new SampleContext();
             try
             {
-                Administrator u = sc.Administrators.Find(textBox1.Text);
+                Administrator u = bd.Administrators.Find(textBox1.Text);
 
                 if (u.Password.Equals(textBox2.Text))
                 {
                     MessageBox.Show("Correct");
                     MainForm mainForm = new MainForm();
                     mainForm.Show();
-                    this.Visible=false;
+                    this.Hide();
                 }
                 else
                 {

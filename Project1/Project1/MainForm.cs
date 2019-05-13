@@ -28,6 +28,7 @@ namespace Project1
                 dataGridView1.Columns[10].Visible = false;
             }
         }
+
         public void UpdateComp()
         {
             using (SampleContext db = new SampleContext())
@@ -39,6 +40,7 @@ namespace Project1
                 dataGridView2.Columns[7].Visible = false;
             }
         }
+
         public void UpdateEmployee()
         {
             using (SampleContext db = new SampleContext())
@@ -243,6 +245,18 @@ namespace Project1
                     MessageBox.Show("Объект обновлен");
                     break;
             }
+        }
+
+        private void Tabform_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePD();
+            UpdateComp();
+            UpdateEmployee();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

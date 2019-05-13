@@ -72,6 +72,7 @@
             this.Tabform.SelectedIndex = 0;
             this.Tabform.Size = new System.Drawing.Size(804, 454);
             this.Tabform.TabIndex = 0;
+            this.Tabform.SelectedIndexChanged += new System.EventHandler(this.Tabform_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -333,6 +334,7 @@
             this.Controls.Add(this.Tabform);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Tabform.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
