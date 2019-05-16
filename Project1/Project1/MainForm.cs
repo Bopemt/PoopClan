@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Linq.Dynamic;
 
 namespace Project1
 {
@@ -20,9 +21,6 @@ namespace Project1
         {
             using (SampleContext db = new SampleContext())
             {
-                //debug
-                //db.Database.Log = (s=> System.Diagnostics.Debug.WriteLine(s));
-                //db.PeripheralDevices.Load();
                 var res = from dev in db.PeripheralDevices
                           join typ in db.Types on dev.TypeId equals typ.TypeId
                           join man in db.Manufacturers on dev.ManufacturerId equals man.ManufacturerId
@@ -30,19 +28,21 @@ namespace Project1
                           select new
                           {
                               dev.PDID,
-                              typ.TypeName,
-                              man.ManufacturerName,
                               dev.name,
                               dev.status,
+                              typ.TypeName,
+                              man.ManufacturerName,
                               dep.DepartamentName,
                               dev.ComputerId
                           };
                 dataGridView1.DataSource = res.ToList();
-                //dataGridView1.DataSource = db.PeripheralDevices.Local.ToBindingList();
-                //dataGridView1.Columns[4].Visible = false;
-                //dataGridView1.Columns[6].Visible = false;
-                //dataGridView1.Columns[8].Visible = false;
-                //dataGridView1.Columns[10].Visible = false;
+                dataGridView1.Columns[0].HeaderText = "ID";
+                dataGridView1.Columns[1].HeaderText = "Name";
+                dataGridView1.Columns[2].HeaderText = "Status";
+                dataGridView1.Columns[3].HeaderText = "Type";
+                dataGridView1.Columns[4].HeaderText = "Manufacturer";
+                dataGridView1.Columns[5].HeaderText = "Departament";
+                dataGridView1.Columns[6].HeaderText = "Computer";
             }
         }
 
@@ -50,24 +50,24 @@ namespace Project1
         {
             using (SampleContext db = new SampleContext())
             {
-                //db.Computers.Load();
-                //dataGridView2.DataSource = db.Computers.Local.ToBindingList();
-                //dataGridView2.Columns[3].Visible = false;
-                //dataGridView2.Columns[5].Visible = false;
-                //dataGridView2.Columns[7].Visible = false;
                 var resn = from cmp in db.Computers
-                          join mat in db.Motherboards on cmp.MotherboardId equals mat.MotherboardId
-                          join hdd in db.HDDs on cmp.HddId equals hdd.HddId
-                          join cp in db.CPUs on cmp.CpuId equals cp.CpuId
-                          select new
-                          {
-                              cmp.ComputerId,
-                              cmp.status,
-                              mat.MotherboardName,
-                              cp.CpuName,
-                              hdd.HddName
-                          };
+                           join mat in db.Motherboards on cmp.MotherboardId equals mat.MotherboardId
+                           join hdd in db.HDDs on cmp.HddId equals hdd.HddId
+                           join cp in db.CPUs on cmp.CpuId equals cp.CpuId
+                           select new
+                           {
+                               cmp.ComputerId,
+                               cmp.status,
+                               mat.MotherboardName,
+                               cp.CpuName,
+                               hdd.HddName
+                           };
                 dataGridView2.DataSource = resn.ToList();
+                dataGridView2.Columns[0].HeaderText = "ID";
+                dataGridView2.Columns[1].HeaderText = "Status";
+                dataGridView2.Columns[2].HeaderText = "Motherboard";
+                dataGridView2.Columns[3].HeaderText = "CPU";
+                dataGridView2.Columns[4].HeaderText = "HDD";
             }
         }
 
@@ -75,10 +75,6 @@ namespace Project1
         {
             using (SampleContext db = new SampleContext())
             {
-                //db.Employees.Load();
-                //dataGridView3.DataSource = db.Employees.Local.ToBindingList();
-                //dataGridView3.Columns[4].Visible = false;
-                //dataGridView3.Columns[6].Visible = false;
                 var resn = from em in db.Employees
                            join dep in db.Departaments on em.DepartamentId equals dep.DepartamentId
                            select new
@@ -90,6 +86,11 @@ namespace Project1
                                em.ComputerId
                            };
                 dataGridView3.DataSource = resn.ToList();
+                dataGridView3.Columns[0].HeaderText = "ID";
+                dataGridView3.Columns[1].HeaderText = "Full Name";
+                dataGridView3.Columns[2].HeaderText = "Position";
+                dataGridView3.Columns[3].HeaderText = "Departament";
+                dataGridView3.Columns[4].HeaderText = "Computer";
             }
         }
 
@@ -99,6 +100,12 @@ namespace Project1
             UpdatePD();
             UpdateComp();
             UpdateEmployee();
+            comboBox1.DataSource = dataGridView1.Columns;
+            comboBox1.DisplayMember = "HeaderText";
+            comboBox2.DataSource = dataGridView2.Columns;
+            comboBox2.DisplayMember = "HeaderText";
+            comboBox3.DataSource = dataGridView3.Columns;
+            comboBox3.DisplayMember = "HeaderText";
         }
 
         private void Delete(object sender, EventArgs e)
@@ -282,6 +289,97 @@ namespace Project1
         {
             Application.Exit();
         }
+
+        int num = 0;
+        int index;
+        private void Search(object sender, EventArgs e)
+        {
+            num = 0;
+            switch (Tabform.SelectedIndex)
+            {
+                case 0:
+                    index = comboBox1.SelectedIndex;
+                    for (int i = 0; i < dataGridView1.RowCount; i++)
+                    {
+                        dataGridView1.Rows[i].Selected = false;
+                        if (dataGridView1.Rows[i].Cells[index].Value != null)
+                            if (dataGridView1.Rows[i].Cells[index].Value.ToString().Contains(textBox1.Text))
+                            {
+                                dataGridView1.Rows[i].Selected = true; num++;
+                            }
+                    }
+                    MessageBox.Show("Найдено записей: " + Convert.ToString(num));
+                    break;
+                case 1:
+                    index = comboBox2.SelectedIndex;
+                    for (int i = 0; i < dataGridView2.RowCount; i++)
+                    {
+                        dataGridView2.Rows[i].Selected = false;
+                        if (dataGridView2.Rows[i].Cells[index].Value != null)
+                            if (dataGridView2.Rows[i].Cells[index].Value.ToString().Contains(textBox2.Text))
+                            {
+                                dataGridView2.Rows[i].Selected = true; num++;
+                            }
+                    }
+                    MessageBox.Show("Найдено записей: " + Convert.ToString(num));
+                    break;
+                case 2:
+                    index = comboBox3.SelectedIndex;
+                    for (int i = 0; i < dataGridView3.RowCount; i++)
+                    {
+                        dataGridView3.Rows[i].Selected = false;
+                        if (dataGridView3.Rows[i].Cells[index].Value != null)
+                            if (dataGridView3.Rows[i].Cells[index].Value.ToString().Contains(textBox3.Text))
+                            {
+                                dataGridView3.Rows[i].Selected = true; num++;
+                            }
+                    }
+                    MessageBox.Show("Найдено записей: " + Convert.ToString(num));
+                    break;
+            }
+        }
+        bool sort = false;
+        private void Sort(object sender, EventArgs e)
+        {
+            switch (Tabform.SelectedIndex)
+            {
+                case 0:
+                    index = comboBox1.SelectedIndex;
+                    if (sort == false)
+                    {
+                        dataGridView1.Sort(dataGridView1.Columns[index], ListSortDirection.Ascending); sort = true;
+                    }
+                    else
+                    {
+                        dataGridView1.Sort(dataGridView1.Columns[index], ListSortDirection.Descending); sort = false;
+                    }
+                    break;
+                case 1:
+                    index = comboBox2.SelectedIndex;
+                    if (sort == false)
+                    {
+                        dataGridView1.Sort(dataGridView2.Columns[index], ListSortDirection.Ascending); sort = true;
+                    }
+                    else
+                    {
+                        dataGridView1.Sort(dataGridView2.Columns[index], ListSortDirection.Descending); sort = false;
+                    }
+                    break;
+                case 2:
+                    index = comboBox3.SelectedIndex;
+                    if (sort == false)
+                    {
+                        dataGridView1.Sort(dataGridView3.Columns[index], ListSortDirection.Ascending); sort = true;
+                    }
+                    else
+                    {
+                        dataGridView1.Sort(dataGridView3.Columns[index], ListSortDirection.Descending); sort = false;
+                    }
+                    break;
+            }
+        }
+
+        
     }
 }
 
