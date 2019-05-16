@@ -149,6 +149,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(783, 384);
             this.dataGridView1.TabIndex = 35;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
             // 
             // button1
             // 
@@ -242,6 +243,7 @@
             this.dataGridView2.Size = new System.Drawing.Size(783, 384);
             this.dataGridView2.TabIndex = 46;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
             // 
             // button7
             // 
@@ -335,6 +337,7 @@
             this.dataGridView3.Size = new System.Drawing.Size(783, 384);
             this.dataGridView3.TabIndex = 46;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
+            this.dataGridView3.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
             // 
             // button12
             // 
