@@ -20,12 +20,29 @@ namespace Project1
         {
             using (SampleContext db = new SampleContext())
             {
-                db.PeripheralDevices.Load();
-                dataGridView1.DataSource = db.PeripheralDevices.Local.ToBindingList();
-                dataGridView1.Columns[4].Visible = false;
-                dataGridView1.Columns[6].Visible = false;
-                dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[10].Visible = false;
+                //debug
+                //db.Database.Log = (s=> System.Diagnostics.Debug.WriteLine(s));
+                //db.PeripheralDevices.Load();
+                var res = from dev in db.PeripheralDevices
+                          join typ in db.Types on dev.TypeId equals typ.TypeId
+                          join man in db.Manufacturers on dev.ManufacturerId equals man.ManufacturerId
+                          join dep in db.Departaments on dev.DepartamentId equals dep.DepartamentId
+                          select new
+                          {
+                              dev.PDID,
+                              typ.TypeName,
+                              man.ManufacturerName,
+                              dev.name,
+                              dev.status,
+                              dep.DepartamentName,
+                              dev.ComputerId
+                          };
+                dataGridView1.DataSource = res.ToList();
+                //dataGridView1.DataSource = db.PeripheralDevices.Local.ToBindingList();
+                //dataGridView1.Columns[4].Visible = false;
+                //dataGridView1.Columns[6].Visible = false;
+                //dataGridView1.Columns[8].Visible = false;
+                //dataGridView1.Columns[10].Visible = false;
             }
         }
 
@@ -33,11 +50,24 @@ namespace Project1
         {
             using (SampleContext db = new SampleContext())
             {
-                db.Computers.Load();
-                dataGridView2.DataSource = db.Computers.Local.ToBindingList();
-                dataGridView2.Columns[3].Visible = false;
-                dataGridView2.Columns[5].Visible = false;
-                dataGridView2.Columns[7].Visible = false;
+                //db.Computers.Load();
+                //dataGridView2.DataSource = db.Computers.Local.ToBindingList();
+                //dataGridView2.Columns[3].Visible = false;
+                //dataGridView2.Columns[5].Visible = false;
+                //dataGridView2.Columns[7].Visible = false;
+                var resn = from cmp in db.Computers
+                          join mat in db.Motherboards on cmp.MotherboardId equals mat.MotherboardId
+                          join hdd in db.HDDs on cmp.HddId equals hdd.HddId
+                          join cp in db.CPUs on cmp.CpuId equals cp.CpuId
+                          select new
+                          {
+                              cmp.ComputerId,
+                              cmp.status,
+                              mat.MotherboardName,
+                              cp.CpuName,
+                              hdd.HddName
+                          };
+                dataGridView2.DataSource = resn.ToList();
             }
         }
 
@@ -45,10 +75,21 @@ namespace Project1
         {
             using (SampleContext db = new SampleContext())
             {
-                db.Employees.Load();
-                dataGridView3.DataSource = db.Employees.Local.ToBindingList();
-                dataGridView3.Columns[4].Visible = false;
-                dataGridView3.Columns[6].Visible = false;
+                //db.Employees.Load();
+                //dataGridView3.DataSource = db.Employees.Local.ToBindingList();
+                //dataGridView3.Columns[4].Visible = false;
+                //dataGridView3.Columns[6].Visible = false;
+                var resn = from em in db.Employees
+                           join dep in db.Departaments on em.DepartamentId equals dep.DepartamentId
+                           select new
+                           {
+                               em.EmployeeID,
+                               em.fullName,
+                               em.position,
+                               dep.DepartamentName,
+                               em.ComputerId
+                           };
+                dataGridView3.DataSource = resn.ToList();
             }
         }
 
