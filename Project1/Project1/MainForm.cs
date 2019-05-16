@@ -113,11 +113,14 @@ namespace Project1
             switch (Tabform.SelectedIndex)
             {
                 case 0:
-                    int index = dataGridView1.SelectedRows[0].Index;
                     int id = 0;
-                    Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
-                    PeripheralDevice player = db.PeripheralDevices.Find(id);
-                    db.PeripheralDevices.Remove(player);
+                    for (int i = 0; i < dataGridView1.SelectedRows.Count; i++)
+                    {
+                        int index = dataGridView1.SelectedRows[0].Index;
+                        Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+                        PeripheralDevice player = db.PeripheralDevices.Find(id);
+                        db.PeripheralDevices.Remove(player);
+                    }
                     db.SaveChanges();
                     UpdatePD();
                     break;
@@ -338,48 +341,22 @@ namespace Project1
                     break;
             }
         }
-        bool sort = false;
-        private void Sort(object sender, EventArgs e)
+
+        private void SelectAllRow(object sender, DataGridViewCellEventArgs e)
         {
             switch (Tabform.SelectedIndex)
             {
                 case 0:
-                    index = comboBox1.SelectedIndex;
-                    if (sort == false)
-                    {
-                        dataGridView1.Sort(dataGridView1.Columns[index], ListSortDirection.Ascending); sort = true;
-                    }
-                    else
-                    {
-                        dataGridView1.Sort(dataGridView1.Columns[index], ListSortDirection.Descending); sort = false;
-                    }
+                    dataGridView1.Rows[e.RowIndex].Selected = true; 
                     break;
                 case 1:
-                    index = comboBox2.SelectedIndex;
-                    if (sort == false)
-                    {
-                        dataGridView1.Sort(dataGridView2.Columns[index], ListSortDirection.Ascending); sort = true;
-                    }
-                    else
-                    {
-                        dataGridView1.Sort(dataGridView2.Columns[index], ListSortDirection.Descending); sort = false;
-                    }
+                    dataGridView2.Rows[e.RowIndex].Selected = true;
                     break;
                 case 2:
-                    index = comboBox3.SelectedIndex;
-                    if (sort == false)
-                    {
-                        dataGridView1.Sort(dataGridView3.Columns[index], ListSortDirection.Ascending); sort = true;
-                    }
-                    else
-                    {
-                        dataGridView1.Sort(dataGridView3.Columns[index], ListSortDirection.Descending); sort = false;
-                    }
+                    dataGridView3.Rows[e.RowIndex].Selected = true;
                     break;
             }
         }
-
-        
     }
 }
 

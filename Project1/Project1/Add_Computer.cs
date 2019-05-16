@@ -54,7 +54,7 @@ namespace Project1
                 s => s.MotherboardId == val
                 ).FirstOrDefault<Motherboard>();
 
-            var val1 = int.Parse(comboBox1.SelectedValue.ToString());
+            var val1 = int.Parse(comboBox2.SelectedValue.ToString());
             computer.hdd = db.HDDs.Where(
                 s => s.HddId == val1
                 ).FirstOrDefault<HDD>();

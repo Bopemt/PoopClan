@@ -385,3 +385,6 @@ C:\Users\Simon\Desktop\Poop\PoopClan\Project1\Project1\obj\Debug\Project1.csproj
 C:\Users\Simon\Desktop\Poop\PoopClan\Project1\Project1\obj\Debug\Project1.csproj.CopyComplete
 C:\Users\Simon\Desktop\Poop\PoopClan\Project1\Project1\obj\Debug\Project1.exe
 C:\Users\Simon\Desktop\Poop\PoopClan\Project1\Project1\obj\Debug\Project1.pdb
+C:\Users\plats\Desktop\PoopClan\Project1\Project1\bin\Debug\System.Linq.Dynamic.dll
+C:\Users\plats\Desktop\PoopClan\Project1\Project1\bin\Debug\System.Linq.Dynamic.pdb
+C:\Users\plats\Desktop\PoopClan\Project1\Project1\bin\Debug\System.Linq.Dynamic.xml
