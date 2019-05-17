@@ -17,6 +17,8 @@ namespace Project1
     {
         SampleContext db = new SampleContext();
 
+        private string path = Application.LocalUserAppDataPath;
+
         public void UpdatePD()
         {
             using (SampleContext db = new SampleContext())
@@ -100,12 +102,14 @@ namespace Project1
             UpdatePD();
             UpdateComp();
             UpdateEmployee();
+            textBox4.Text = path;
             comboBox1.DataSource = dataGridView1.Columns;
             comboBox1.DisplayMember = "HeaderText";
             comboBox2.DataSource = dataGridView2.Columns;
             comboBox2.DisplayMember = "HeaderText";
             comboBox3.DataSource = dataGridView3.Columns;
             comboBox3.DisplayMember = "HeaderText";
+            comboBox4.SelectedIndex = 0;
         }
 
         private void Delete(object sender, EventArgs e)
@@ -132,7 +136,7 @@ namespace Project1
                     break;
                 case 1:
                     int id1 = 0;
-                    try
+                    //try
                     {
                         for (int i = 0; i < dataGridView2.RowCount; i++)
                         {
@@ -146,7 +150,7 @@ namespace Project1
                         db.SaveChanges();
                         UpdateComp();
                     }
-                    catch { MessageBox.Show("Надо выбрать строку полностью"); }
+                    //catch { MessageBox.Show("Надо выбрать строку полностью"); }
                     break;
                 case 2:
                     int id2 = 0;
@@ -154,7 +158,7 @@ namespace Project1
                     {
                         for (int i = 0; i < dataGridView3.RowCount; i++)
                         {
-                            if (dataGridView2.Rows[i].Selected == true)
+                            if (dataGridView3.Rows[i].Selected == true)
                             {
                                 Int32.TryParse(dataGridView3[0, i].Value.ToString(), out id2);
                                 Employee player2 = db.Employees.Find(id2);
@@ -382,7 +386,7 @@ namespace Project1
             switch (Tabform.SelectedIndex)
             {
                 case 0:
-                    dataGridView1.Rows[e.RowIndex].Selected = true; 
+                    dataGridView1.Rows[e.RowIndex].Selected = true;
                     break;
                 case 1:
                     dataGridView2.Rows[e.RowIndex].Selected = true;
@@ -392,6 +396,275 @@ namespace Project1
                     break;
             }
         }
+
+        private void writerButton_Click(object sender, EventArgs e)
+        {
+            //WirterForm wr = new WirterForm();
+            //wr.ShowDialog();  
+            List<List<string>> s;
+            Writer wr = new Writer();
+            string ComputerId = "0";
+            string status;
+            string DepartamentName;
+            string fullName;
+
+            string PDID;
+            string name;
+            string type;
+            string manufac;
+            switch (comboBox4.SelectedIndex)
+            {
+                case 0:
+                    wr.ReadyToC();
+                    var res0 = from cmp in db.Computers
+                               join vrk in db.Employees on cmp.ComputerId equals vrk.ComputerId
+                               join nrk in db.Computers on cmp.ComputerId equals nrk.ComputerId
+                               join dep in db.Departaments on vrk.DepartamentId equals dep.DepartamentId
+                               where cmp.status == "On work"
+                               select new List<string>()
+                       {
+                           cmp.ComputerId.ToString(),
+                           cmp.status,
+                           dep.DepartamentName,
+                           vrk.fullName
+                       };
+                    s = res0.ToList();
+                    for (int i = 0; i != s.Count; i++)
+                    {
+                        ComputerId = s[i][0];
+                        status = s[i][1];
+                        DepartamentName = s[i][2];
+                        fullName = s[i][3];
+                        wr.DoWriteC(ComputerId, status, DepartamentName, fullName);
+                    }
+                    break;
+                case 1:
+                    wr.ReadyToC();
+                    var res1 = from cmp in db.Computers
+                               join vrk in db.Employees on cmp.ComputerId equals vrk.ComputerId
+                               join nrk in db.Computers on cmp.ComputerId equals nrk.ComputerId
+                               join dep in db.Departaments on vrk.DepartamentId equals dep.DepartamentId
+                               where cmp.status == "On repair"
+                               select new List<string>()
+                       {
+                           cmp.ComputerId.ToString(),
+                           cmp.status,
+                           dep.DepartamentName,
+                           vrk.fullName
+                       };
+                    s = res1.ToList();
+                    for (int i = 0; i != s.Count; i++)
+                    {
+                        ComputerId = s[i][0];
+                        status = s[i][1];
+                        DepartamentName = s[i][2];
+                        fullName = s[i][3];
+                        wr.DoWriteC(ComputerId, status, DepartamentName, fullName);
+                    }
+                    break;
+                case 2:
+                    wr.ReadyToC();
+                    var res2 = from cmp in db.Computers
+                               join vrk in db.Employees on cmp.ComputerId equals vrk.ComputerId
+                               join nrk in db.Computers on cmp.ComputerId equals nrk.ComputerId
+                               join dep in db.Departaments on vrk.DepartamentId equals dep.DepartamentId
+                               where cmp.status == "Broke"
+                               select new List<string>()
+                       {
+                           cmp.ComputerId.ToString(),
+                           cmp.status,
+                           dep.DepartamentName,
+                           vrk.fullName
+                       };
+                    s = res2.ToList();
+                    for (int i = 0; i != s.Count; i++)
+                    {
+                        ComputerId = s[i][0];
+                        status = s[i][1];
+                        DepartamentName = s[i][2];
+                        fullName = s[i][3];
+                        wr.DoWriteC(ComputerId, status, DepartamentName, fullName);
+                    }
+                    break;
+                case 3:
+                    wr.ReadyToD();
+                    var pdr1 = from dev in db.PeripheralDevices
+                               join typ in db.Types on dev.TypeId equals typ.TypeId
+                               join man in db.Manufacturers on dev.ManufacturerId equals man.ManufacturerId
+                               join dep in db.Departaments on dev.DepartamentId equals dep.DepartamentId
+                               where dev.status == "On work"
+                               select new List<string>()
+                          {
+                              dev.PDID.ToString(),
+                              typ.TypeName,
+                              man.ManufacturerName,
+                              dev.name,
+                              dev.status,
+                              dep.DepartamentName,
+                              dev.ComputerId.ToString()
+                          };
+                    s = pdr1.ToList();
+                    for (int i = 0; i != s.Count; i++)
+                    {
+                        PDID = s[i][0];
+                        type = s[i][1];
+                        manufac = s[i][2];
+                        name = s[i][3];
+                        status = s[i][4];
+                        DepartamentName = s[i][5];
+                        ComputerId = s[i][6];
+                        wr.DoWriteP(PDID, ComputerId, name, type, manufac, status);
+                    }
+                    break;
+                case 4:
+                    wr.ReadyToD();
+                    var pdr2 = from dev in db.PeripheralDevices
+                               join typ in db.Types on dev.TypeId equals typ.TypeId
+                               join man in db.Manufacturers on dev.ManufacturerId equals man.ManufacturerId
+                               join dep in db.Departaments on dev.DepartamentId equals dep.DepartamentId
+                               where dev.status == "On repair"
+                               select new List<string>()
+                          {
+                              dev.PDID.ToString(),
+                              typ.TypeName,
+                              man.ManufacturerName,
+                              dev.name,
+                              dev.status,
+                              dep.DepartamentName,
+                              dev.ComputerId.ToString()
+                          };
+                    s = pdr2.ToList();
+                    for (int i = 0; i != s.Count; i++)
+                    {
+                        PDID = s[i][0];
+                        type = s[i][1];
+                        manufac = s[i][2];
+                        name = s[i][3];
+                        status = s[i][4];
+                        DepartamentName = s[i][5];
+                        ComputerId = s[i][6];
+                        wr.DoWriteP(PDID, ComputerId, name, type, manufac, status);
+                    }
+                    break;
+                case 5:
+                    wr.ReadyToD();
+                    var pdr3 = from dev in db.PeripheralDevices
+                               join typ in db.Types on dev.TypeId equals typ.TypeId
+                               join man in db.Manufacturers on dev.ManufacturerId equals man.ManufacturerId
+                               join dep in db.Departaments on dev.DepartamentId equals dep.DepartamentId
+                               where dev.status == "Broke"
+                               select new List<string>()
+                          {
+                              dev.PDID.ToString(),
+                              typ.TypeName,
+                              man.ManufacturerName,
+                              dev.name,
+                              dev.status,
+                              dep.DepartamentName,
+                              dev.ComputerId.ToString()
+                          };
+                    s = pdr3.ToList();
+                    for (int i = 0; i != s.Count; i++)
+                    {
+                        PDID = s[i][0];
+                        type = s[i][1];
+                        manufac = s[i][2];
+                        name = s[i][3];
+                        status = s[i][4];
+                        DepartamentName = s[i][5];
+                        ComputerId = s[i][6];
+                        wr.DoWriteP(PDID, ComputerId, name, type, manufac, status);
+                    }
+                    break;
+                case 6:
+                    wr.ReadyToAC();
+                    var resn1 = from cmp in db.Computers
+                                join mat in db.Motherboards on cmp.MotherboardId equals mat.MotherboardId
+                                join cpu in db.CPUs on cmp.CpuId equals cpu.CpuId
+                                join hdd in db.HDDs on cmp.HddId equals hdd.HddId
+                                where cmp.status == "On work"
+                                select new List<string>()
+                       {
+                           cmp.ComputerId.ToString(),
+                           cmp.status,
+                           mat.MotherboardName,
+                           cpu.CpuName,
+                           hdd.HddName
+                       };
+                    s = resn1.ToList();
+                    for (int i = 0; i != s.Count; i++)
+                    {
+                        ComputerId = s[i][0];
+                        status = s[i][1];
+                        DepartamentName = s[i][2];
+                        fullName = s[i][3];
+                        manufac = s[i][4];
+                        wr.DoWriteAC(ComputerId, status, DepartamentName, fullName, manufac);
+                    }
+                    break;
+                case 7:
+                    wr.ReadyToAC();
+                    var resn2 = from cmp in db.Computers
+                                join mat in db.Motherboards on cmp.MotherboardId equals mat.MotherboardId
+                                join cpu in db.CPUs on cmp.CpuId equals cpu.CpuId
+                                join hdd in db.HDDs on cmp.HddId equals hdd.HddId
+                                where cmp.status == "On repair"
+                                select new List<string>()
+                       {
+                           cmp.ComputerId.ToString(),
+                           cmp.status,
+                           mat.MotherboardName,
+                           cpu.CpuName,
+                           hdd.HddName
+                       };
+                    s = resn2.ToList();
+                    for (int i = 0; i != s.Count; i++)
+                    {
+                        ComputerId = s[i][0];
+                        status = s[i][1];
+                        DepartamentName = s[i][2];
+                        fullName = s[i][3];
+                        manufac = s[i][4];
+                        wr.DoWriteAC(ComputerId, status, DepartamentName, fullName, manufac);
+                    }
+                    break;
+                case 8:
+                    wr.ReadyToAC();
+                    var resn3 = from cmp in db.Computers
+                                join mat in db.Motherboards on cmp.MotherboardId equals mat.MotherboardId
+                                join cpu in db.CPUs on cmp.CpuId equals cpu.CpuId
+                                join hdd in db.HDDs on cmp.HddId equals hdd.HddId
+                                where cmp.status == "Broke"
+                                select new List<string>()
+                       {
+                           cmp.ComputerId.ToString(),
+                           cmp.status,
+                           mat.MotherboardName,
+                           cpu.CpuName,
+                           hdd.HddName
+                       };
+                    s = resn3.ToList();
+                    for (int i = 0; i != s.Count; i++)
+                    {
+                        ComputerId = s[i][0];
+                        status = s[i][1];
+                        DepartamentName = s[i][2];
+                        fullName = s[i][3];
+                        manufac = s[i][4];
+                        wr.DoWriteAC(ComputerId, status, DepartamentName, fullName, manufac);
+                    }
+                    break;
+            }
+            wr.SaveFile(path);
+        }
+
+        private void pathButton_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new FolderBrowserDialog())
+                if (dialog.ShowDialog() == DialogResult.OK)
+                    path = dialog.SelectedPath;
+            textBox4.Text = path;
+        }   
     }
 }
 

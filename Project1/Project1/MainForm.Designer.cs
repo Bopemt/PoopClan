@@ -53,6 +53,10 @@
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.button12 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button13 = new System.Windows.Forms.Button();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button14 = new System.Windows.Forms.Button();
             this.Tabform.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -73,7 +77,7 @@
             this.Tabform.Location = new System.Drawing.Point(0, 0);
             this.Tabform.Name = "Tabform";
             this.Tabform.SelectedIndex = 0;
-            this.Tabform.Size = new System.Drawing.Size(804, 454);
+            this.Tabform.Size = new System.Drawing.Size(804, 447);
             this.Tabform.TabIndex = 0;
             this.Tabform.SelectedIndexChanged += new System.EventHandler(this.Tabform_SelectedIndexChanged);
             // 
@@ -157,7 +161,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(783, 384);
             this.dataGridView1.TabIndex = 35;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
             // 
             // button1
             // 
@@ -252,7 +256,7 @@
             this.dataGridView2.Size = new System.Drawing.Size(783, 384);
             this.dataGridView2.TabIndex = 46;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
+            this.dataGridView2.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
             // 
             // button7
             // 
@@ -283,7 +287,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(796, 428);
+            this.tabPage3.Size = new System.Drawing.Size(796, 421);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Employees";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -346,7 +350,7 @@
             this.dataGridView3.Size = new System.Drawing.Size(783, 384);
             this.dataGridView3.TabIndex = 46;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
-            this.dataGridView3.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
+            this.dataGridView3.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAllRow);
             // 
             // button12
             // 
@@ -365,11 +369,65 @@
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 44;
             // 
+            // button13
+            // 
+            this.button13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button13.Location = new System.Drawing.Point(420, 450);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(75, 23);
+            this.button13.TabIndex = 1;
+            this.button13.Text = "Report";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.writerButton_Click);
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Items.AddRange(new object[] {
+            "По работающим компьютерам с прикрепленным сотрудником",
+            "По компьютерам с прикрепленным сотрудником, находящимся в ремонте",
+            "По списанным компьютерам с прикрепленным сотрудником",
+            "По работающему компьютерному оборудованию",
+            "По компьютерному оборудованию, находящемуся в ремонте",
+            "По списанному компьютерному обборудованию",
+            "По всем имеющимся работающим компьютерам",
+            "По всем имеющимся компьютерам в ремонте",
+            "По всем имеющимся списанным компьютерам"});
+            this.comboBox4.Location = new System.Drawing.Point(501, 451);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(289, 21);
+            this.comboBox4.TabIndex = 52;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox4.Location = new System.Drawing.Point(8, 451);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(325, 20);
+            this.textBox4.TabIndex = 53;
+            // 
+            // button14
+            // 
+            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button14.Location = new System.Drawing.Point(339, 450);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(75, 23);
+            this.button14.TabIndex = 54;
+            this.button14.Text = "Explorer";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.pathButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 479);
+            this.Controls.Add(this.button14);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.button13);
             this.Controls.Add(this.Tabform);
             this.Name = "MainForm";
             this.Text = "MainForm";
@@ -385,6 +443,7 @@
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -415,5 +474,9 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button button14;
     }
 }
