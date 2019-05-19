@@ -117,31 +117,37 @@ namespace Project1
             switch (Tabform.SelectedIndex)
             {
                 case 0:
+                    int num = 0;
                     int id = 0;
-                    try
+                    bool scan = true;
+                    for (int i = 0; i < dataGridView1.RowCount; i++)
                     {
-                        for (int i = 0; i < dataGridView1.RowCount; i++)
+                        if (dataGridView1.Rows[i].Selected == true)
                         {
-                            if (dataGridView1.Rows[i].Selected == true)
-                            {
-                                Int32.TryParse(dataGridView1[0, i].Value.ToString(), out id);
-                                PeripheralDevice player = db.PeripheralDevices.Find(id);
-                                db.PeripheralDevices.Remove(player);
-                            }
+                            Int32.TryParse(dataGridView1[0, i].Value.ToString(), out id);
+                            PeripheralDevice player = db.PeripheralDevices.Find(id);
+                            db.PeripheralDevices.Remove(player);
+                            num++;
+                            scan = false;
                         }
-                        db.SaveChanges();
-                        UpdatePD();
                     }
-                    catch { MessageBox.Show("Надо выбрать строку полностью"); }
+                    db.SaveChanges();
+                    UpdatePD();
+                    if (scan == true)
+                        MessageBox.Show("Надо выбрать строку полностью");
+                    if (scan == false)
+                        MessageBox.Show("Удалено:" + num);
                     break;
                 case 1:
-                    int num = 0;
+                    num = 0;
                     int id1 = 0;
-                    bool scan = true;
+                    scan = true;
+                    int sel = 0;
                     for (int i = 0; i < dataGridView2.RowCount; i++)
                     {
                         if (dataGridView2.Rows[i].Selected == true)
                         {
+                            sel++;
                             Int32.TryParse(dataGridView2[0, i].Value.ToString(), out id1);
                             Computer player1 = db.Computers.Find(id1);
                             if (db.Employees.Where(s => s.ComputerId == player1.ComputerId).FirstOrDefault<Employee>() != null || db.PeripheralDevices.Where(s => s.ComputerId == player1.ComputerId).FirstOrDefault<PeripheralDevice>() != null)
@@ -150,9 +156,10 @@ namespace Project1
                             }
                         }
                     }
-                    if(scan==false)
-                        MessageBox.Show("Надо выбрать строку полностью или к этому компьютеру уже назначен пользователь или периферия");
-                    if (scan == true)
+                    if (sel == 0) MessageBox.Show("Надо выбрать строку полностью");
+                    else if (scan == false)
+                        MessageBox.Show("К этому компьютеру уже назначен пользователь или периферия");
+                    else if (scan == true)
                     {
                         for (int i = 0; i < dataGridView2.RowCount; i++)
                         {
@@ -166,26 +173,30 @@ namespace Project1
 
                         db.SaveChanges();
                         UpdateComp();
-                        MessageBox.Show("Компьютеров удалено:" + num);
+                        MessageBox.Show("Удалено:" + num);
                     }
                     break;
                 case 2:
+                    num = 0;
+                    scan = true;
                     int id2 = 0;
-                    try
+                    for (int i = 0; i < dataGridView3.RowCount; i++)
                     {
-                        for (int i = 0; i < dataGridView3.RowCount; i++)
+                        if (dataGridView3.Rows[i].Selected == true)
                         {
-                            if (dataGridView3.Rows[i].Selected == true)
-                            {
-                                Int32.TryParse(dataGridView3[0, i].Value.ToString(), out id2);
-                                Employee player2 = db.Employees.Find(id2);
-                                db.Employees.Remove(player2);
-                            }
+                            Int32.TryParse(dataGridView3[0, i].Value.ToString(), out id2);
+                            Employee player2 = db.Employees.Find(id2);
+                            db.Employees.Remove(player2);
+                            num++;
+                            scan = false;
                         }
-                        db.SaveChanges();
-                        UpdateEmployee();
                     }
-                    catch { MessageBox.Show("Надо выбрать строку полностью"); }
+                    db.SaveChanges();
+                    UpdateEmployee();
+                    if (scan == true)
+                        MessageBox.Show("Надо выбрать строку полностью");
+                    if (scan == false)
+                        MessageBox.Show("Удалено:" + num);
                     break;
             }
         }
