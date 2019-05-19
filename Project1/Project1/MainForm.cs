@@ -135,8 +135,24 @@ namespace Project1
                     catch { MessageBox.Show("Надо выбрать строку полностью"); }
                     break;
                 case 1:
+                    int num = 0;
                     int id1 = 0;
-                    //try
+                    bool scan = true;
+                    for (int i = 0; i < dataGridView2.RowCount; i++)
+                    {
+                        if (dataGridView2.Rows[i].Selected == true)
+                        {
+                            Int32.TryParse(dataGridView2[0, i].Value.ToString(), out id1);
+                            Computer player1 = db.Computers.Find(id1);
+                            if (db.Employees.Where(s => s.ComputerId == player1.ComputerId).FirstOrDefault<Employee>() != null || db.PeripheralDevices.Where(s => s.ComputerId == player1.ComputerId).FirstOrDefault<PeripheralDevice>() != null)
+                            {
+                                scan = false;
+                            }
+                        }
+                    }
+                    if(scan==false)
+                        MessageBox.Show("Надо выбрать строку полностью или к этому компьютеру уже назначен пользователь или периферия");
+                    if (scan == true)
                     {
                         for (int i = 0; i < dataGridView2.RowCount; i++)
                         {
@@ -144,13 +160,14 @@ namespace Project1
                             {
                                 Int32.TryParse(dataGridView2[0, i].Value.ToString(), out id1);
                                 Computer player1 = db.Computers.Find(id1);
-                                db.Computers.Remove(player1);
+                                db.Computers.Remove(player1); num++;
                             }
                         }
+
                         db.SaveChanges();
                         UpdateComp();
+                        MessageBox.Show("Компьютеров удалено:" + num);
                     }
-                    //catch { MessageBox.Show("Надо выбрать строку полностью"); }
                     break;
                 case 2:
                     int id2 = 0;
