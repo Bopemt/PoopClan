@@ -36,14 +36,19 @@ namespace Project1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Employee employee = new Employee();
-            employee.fullName = textBox1.Text;
-            employee.position = textBox2.Text;
-            employee.departament = db.Departaments.Find(comboBox1.SelectedValue);
-            employee.computer = db.Computers.Find(comboBox2.SelectedValue);
-            db.Employees.Add(employee);
-            db.SaveChanges();
-            this.Close();
+            if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
+                MessageBox.Show("Fill all fields");
+            else
+            {
+                Employee employee = new Employee();
+                employee.fullName = textBox1.Text;
+                employee.position = textBox2.Text;
+                employee.departament = db.Departaments.Find(comboBox1.SelectedValue);
+                employee.computer = db.Computers.Find(comboBox2.SelectedValue);
+                db.Employees.Add(employee);
+                db.SaveChanges();
+                this.Close();
+            }
         }
         
 

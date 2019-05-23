@@ -22,11 +22,16 @@ namespace Project1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Manufacturer manufacturer = new Manufacturer();
-            manufacturer.ManufacturerName = textBox1.Text;
-            db.Manufacturers.Add(manufacturer);
-            db.SaveChanges();
-            this.Close();
+            if (textBox1.Text.Equals(""))
+                MessageBox.Show("Fill all fields");
+            else
+            {
+                Manufacturer manufacturer = new Manufacturer();
+                manufacturer.ManufacturerName = textBox1.Text;
+                db.Manufacturers.Add(manufacturer);
+                db.SaveChanges();
+                this.Close();
+            }
         }
     }
 }

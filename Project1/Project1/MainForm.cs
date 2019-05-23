@@ -692,7 +692,21 @@ namespace Project1
                 if (dialog.ShowDialog() == DialogResult.OK)
                     path = dialog.SelectedPath;
             textBox4.Text = path;
-        }   
+        }
+
+        private void AdministratorButton(object sender, EventArgs e)
+        {
+            Add_Administrator pdForm = new Add_Administrator();
+            pdForm.ShowDialog();
+            UpdatePD();
+        }
+
+        private void Logout(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form ifrm = Application.OpenForms[0];
+            ifrm.Show();
+        }
     }
 }
 

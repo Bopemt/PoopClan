@@ -131,6 +131,12 @@
     <Compile Include="Add_Computer.Designer.cs">
       <DependentUpon>Add_Computer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Auth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auth.Designer.cs">
+      <DependentUpon>Auth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Authorization.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -297,12 +303,6 @@
     <Compile Include="Redit.Designer.cs">
       <DependentUpon>Redit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sample.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sample.Designer.cs">
-      <DependentUpon>Sample.cs</DependentUpon>
-    </Compile>
     <Compile Include="SampleContext.cs" />
     <Compile Include="Writer.cs" />
     <EmbeddedResource Include="Add Administrator.resx">
@@ -342,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Add_Computer.resx">
       <DependentUpon>Add_Computer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auth.resx">
+      <DependentUpon>Auth.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Authorization.resx">
       <DependentUpon>Authorization.cs</DependentUpon>
@@ -466,9 +469,6 @@
     </Compile>
     <EmbeddedResource Include="Redit.resx">
       <DependentUpon>Redit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sample.resx">
-      <DependentUpon>Sample.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

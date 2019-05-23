@@ -38,17 +38,22 @@ namespace Project1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Motherboard motherboard = new Motherboard();
-            motherboard.MotherboardName = textBox1.Text;
+            if (textBox1.Text.Equals(""))
+                MessageBox.Show("Fill all fields");
+            else
+            {
+                Motherboard motherboard = new Motherboard();
+                motherboard.MotherboardName = textBox1.Text;
 
-            var val = int.Parse(comboBox1.SelectedValue.ToString());
-            motherboard.manufacturer = db.Manufacturers.Where(
-                s => s.ManufacturerId == val
-                ).FirstOrDefault<Manufacturer>();
+                var val = int.Parse(comboBox1.SelectedValue.ToString());
+                motherboard.manufacturer = db.Manufacturers.Where(
+                    s => s.ManufacturerId == val
+                    ).FirstOrDefault<Manufacturer>();
 
-            db.Motherboards.Add(motherboard);
-            db.SaveChanges();
-            this.Close();
+                db.Motherboards.Add(motherboard);
+                db.SaveChanges();
+                this.Close();
+            }
         }
     }
 }

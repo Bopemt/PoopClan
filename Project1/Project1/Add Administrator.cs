@@ -20,13 +20,19 @@ namespace Project1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (SampleContext db = new SampleContext())
+            if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
+                MessageBox.Show("Fill all fields");
+            else
             {
-                Administrator administrator = new Administrator();
-                administrator.Login = textBox1.Text;
-                administrator.Password = textBox2.Text;
-                db.Administrators.Add(administrator);
-                db.SaveChanges();
+                using (SampleContext db = new SampleContext())
+                {
+                    Administrator administrator = new Administrator();
+                    administrator.Login = textBox1.Text;
+                    administrator.Password = textBox2.Text;
+                    db.Administrators.Add(administrator);
+                    db.SaveChanges();
+                    this.Close();
+                }
             }
         }
     }

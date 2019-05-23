@@ -37,16 +37,21 @@ namespace Project1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CPU cpu = new CPU();
-            var val = int.Parse(comboBox1.SelectedValue.ToString());
-            cpu.manufacturer = db.Manufacturers.Where(
-                s => s.ManufacturerId == val
-                ).FirstOrDefault<Manufacturer>();
-            cpu.CpuName = textBox1.Text;
-            cpu.rate = textBox2.Text;
-            db.CPUs.Add(cpu);
-            db.SaveChanges();
-            this.Close();
+            if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
+                MessageBox.Show("Fill all fields");
+            else
+            {
+                CPU cpu = new CPU();
+                var val = int.Parse(comboBox1.SelectedValue.ToString());
+                cpu.manufacturer = db.Manufacturers.Where(
+                    s => s.ManufacturerId == val
+                    ).FirstOrDefault<Manufacturer>();
+                cpu.CpuName = textBox1.Text;
+                cpu.rate = textBox2.Text;
+                db.CPUs.Add(cpu);
+                db.SaveChanges();
+                this.Close();
+            }
         }
     }
 }

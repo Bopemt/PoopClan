@@ -53,26 +53,31 @@ namespace Project1
 
         private void Add_Button(object sender, EventArgs e)
         {
-            PeripheralDevice peripheral = new PeripheralDevice();
-            peripheral.status = comboBox4.Text;
-            peripheral.name = textBox2.Text;
+            if (textBox2.Text.Equals(""))
+                MessageBox.Show("Fill all fields");
+            else
+            {
+                PeripheralDevice peripheral = new PeripheralDevice();
+                peripheral.status = comboBox4.Text;
+                peripheral.name = textBox2.Text;
 
-            var val = int.Parse(comboBox1.SelectedValue.ToString());
-            peripheral.manufacturer = db.Manufacturers.Where(s => s.ManufacturerId == val).FirstOrDefault<Manufacturer>();
+                var val = int.Parse(comboBox1.SelectedValue.ToString());
+                peripheral.manufacturer = db.Manufacturers.Where(s => s.ManufacturerId == val).FirstOrDefault<Manufacturer>();
 
-            var val1 = int.Parse(comboBox2.SelectedValue.ToString());
-            Project1.Type t = db.Types.Where(s => s.TypeId == val1).FirstOrDefault<Type>();
-            peripheral.TypeId = t.TypeId;
+                var val1 = int.Parse(comboBox2.SelectedValue.ToString());
+                Project1.Type t = db.Types.Where(s => s.TypeId == val1).FirstOrDefault<Type>();
+                peripheral.TypeId = t.TypeId;
 
-            var val2 = int.Parse(comboBox3.SelectedValue.ToString());
-            peripheral.departament = db.Departaments.Where(s => s.DepartamentId == val2).FirstOrDefault<Departament>();
+                var val2 = int.Parse(comboBox3.SelectedValue.ToString());
+                peripheral.departament = db.Departaments.Where(s => s.DepartamentId == val2).FirstOrDefault<Departament>();
 
-            var val3 = int.Parse(comboBox5.SelectedValue.ToString());
-            peripheral.computer = db.Computers.Where(s => s.ComputerId == val3).FirstOrDefault<Computer>();
+                var val3 = int.Parse(comboBox5.SelectedValue.ToString());
+                peripheral.computer = db.Computers.Where(s => s.ComputerId == val3).FirstOrDefault<Computer>();
 
-            db.PeripheralDevices.Add(peripheral);
-            db.SaveChanges();
-            this.Close();
+                db.PeripheralDevices.Add(peripheral);
+                db.SaveChanges();
+                this.Close();
+            }
         }
         
         private void Add_Peripheral_Device_Load(object sender, EventArgs e)

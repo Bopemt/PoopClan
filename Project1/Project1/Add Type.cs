@@ -23,13 +23,18 @@ namespace Project1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Type type = new Type
+            if (textBox1.Text.Equals(""))
+                MessageBox.Show("Fill all fields");
+            else
             {
-                TypeName = textBox1.Text
-            };
-            db.Types.Add(type);
-            db.SaveChanges();
-            this.Close();
+                Type type = new Type
+                {
+                    TypeName = textBox1.Text
+                };
+                db.Types.Add(type);
+                db.SaveChanges();
+                this.Close();
+            }
         }
     }
 }

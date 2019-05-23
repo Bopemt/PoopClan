@@ -20,13 +20,18 @@ namespace Project1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (SampleContext db = new SampleContext())
+            if (textBox1.Text.Equals(""))
+                MessageBox.Show("Fill all fields");
+            else
             {
-                Departament departament = new Departament();
-                departament.DepartamentName = textBox1.Text;
-                db.Departaments.Add(departament);
-                db.SaveChanges();
-                this.Close();
+                using (SampleContext db = new SampleContext())
+                {
+                    Departament departament = new Departament();
+                    departament.DepartamentName = textBox1.Text;
+                    db.Departaments.Add(departament);
+                    db.SaveChanges();
+                    this.Close();
+                }
             }
         }
     }

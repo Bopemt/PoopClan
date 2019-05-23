@@ -38,16 +38,21 @@ namespace Project1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            HDD hdd = new HDD();
-            var val = int.Parse(comboBox1.SelectedValue.ToString());
-            hdd.manufacturer = db.Manufacturers.Where(
-                s => s.ManufacturerId == val
-                ).FirstOrDefault<Manufacturer>();
-            hdd.capacity = Convert.ToInt32(textBox1.Text);
-            hdd.HddName = textBox2.Text;
-            db.HDDs.Add(hdd);
-            db.SaveChanges();
-            this.Close();
+            if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
+                MessageBox.Show("Fill all fields");
+            else
+            {
+                HDD hdd = new HDD();
+                var val = int.Parse(comboBox1.SelectedValue.ToString());
+                hdd.manufacturer = db.Manufacturers.Where(
+                    s => s.ManufacturerId == val
+                    ).FirstOrDefault<Manufacturer>();
+                hdd.capacity = Convert.ToInt32(textBox1.Text);
+                hdd.HddName = textBox2.Text;
+                db.HDDs.Add(hdd);
+                db.SaveChanges();
+                this.Close();
+            }
         }
     }
 }

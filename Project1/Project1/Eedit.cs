@@ -47,5 +47,13 @@ namespace Project1
             computerForm.ShowDialog();
             CB2();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
+                MessageBox.Show("Fill all fields");
+            else
+                this.DialogResult = DialogResult.OK;
+        }
     }
 }
