@@ -45,6 +45,7 @@ namespace Project1
                 dataGridView1.Columns[4].HeaderText = "Manufacturer";
                 dataGridView1.Columns[5].HeaderText = "Departament";
                 dataGridView1.Columns[6].HeaderText = "Computer";
+                dataGridView1.Rows[0].Selected = true;
             }
         }
 
@@ -70,6 +71,7 @@ namespace Project1
                 dataGridView2.Columns[2].HeaderText = "Motherboard";
                 dataGridView2.Columns[3].HeaderText = "CPU";
                 dataGridView2.Columns[4].HeaderText = "HDD";
+                dataGridView2.Rows[0].Selected = true;
             }
         }
 
@@ -93,6 +95,7 @@ namespace Project1
                 dataGridView3.Columns[2].HeaderText = "Position";
                 dataGridView3.Columns[3].HeaderText = "Departament";
                 dataGridView3.Columns[4].HeaderText = "Computer";
+                dataGridView3.Rows[0].Selected = true;
             }
         }
 
@@ -414,13 +417,16 @@ namespace Project1
             switch (Tabform.SelectedIndex)
             {
                 case 0:
-                    dataGridView1.Rows[e.RowIndex].Selected = true;
+                    if (e.RowIndex != -1)
+                        dataGridView1.Rows[e.RowIndex].Selected = true;
                     break;
                 case 1:
-                    dataGridView2.Rows[e.RowIndex].Selected = true;
+                    if (e.RowIndex != -1)
+                        dataGridView2.Rows[e.RowIndex].Selected = true;
                     break;
                 case 2:
-                    dataGridView3.Rows[e.RowIndex].Selected = true;
+                    if (e.RowIndex != -1)
+                        dataGridView3.Rows[e.RowIndex].Selected = true;
                     break;
             }
         }
@@ -709,4 +715,3 @@ namespace Project1
         }
     }
 }
-
