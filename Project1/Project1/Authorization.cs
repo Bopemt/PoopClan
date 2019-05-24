@@ -32,6 +32,11 @@ namespace Project1
                     MainForm mainForm = new MainForm();
                     mainForm.Show();
                     this.Hide();
+                    t1 = true;
+                    t2 = true;
+                    textBox2.Text = "Enter your password";
+                    textBox1.Text = "Enter your email address";
+                    textBox2.UseSystemPasswordChar = false;
                 }
                 else
                 {
@@ -53,6 +58,11 @@ namespace Project1
         private void textBox1_Click(object sender, EventArgs e)
         {
             if (t2) { textBox1.Text = string.Empty; t2 = false; }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

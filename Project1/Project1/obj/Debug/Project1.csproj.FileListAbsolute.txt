@@ -248,7 +248,6 @@ C:\Users\plats\Desktop\PoopClan\Project1\Project1\obj\Debug\Project1.Migrations.
 C:\Users\plats\Desktop\PoopClan\Project1\Project1\obj\Debug\Project1.Migrations.twentytwo.resources
 C:\Users\plats\Desktop\PoopClan\Project1\Project1\obj\Debug\Project1.Properties.Resources.resources
 C:\Users\plats\Desktop\PoopClan\Project1\Project1\obj\Debug\Project1.Redit.resources
-C:\Users\plats\Desktop\PoopClan\Project1\Project1\obj\Debug\Project1.Sample.resources
 C:\Users\plats\Desktop\PoopClan\Project1\Project1\obj\Debug\Project1.csproj.GenerateResource.cache
 C:\Users\plats\Desktop\PoopClan\Project1\Project1\obj\Debug\Project1.csproj.CoreCompileInputs.cache
 C:\Users\plats\Desktop\PoopClan\Project1\Project1\obj\Debug\Project1.csproj.CopyComplete
@@ -455,3 +454,4 @@ C:\Users\Simon\Desktop\Poopclan\Project1\Project1\obj\Debug\Project1.exe
 C:\Users\Simon\Desktop\Poopclan\Project1\Project1\obj\Debug\Project1.pdb
 C:\Users\Simon\Desktop\Poopclan\Project1\Project1\obj\Debug\Project1.csproj.ResolveComReference.cache
 C:\Users\Simon\Desktop\Poopclan\Project1\Project1\obj\Debug\Project1.Auth.resources
+C:\Users\plats\Desktop\PoopClan\Project1\Project1\obj\Debug\Project1.csproj.ResolveComReference.cache

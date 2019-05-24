@@ -73,6 +73,7 @@
             this.button2.TabIndex = 15;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -145,12 +146,10 @@
             this.textBox2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.textBox2.Location = new System.Drawing.Point(373, 275);
-            this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(404, 34);
+            this.textBox2.Size = new System.Drawing.Size(404, 31);
             this.textBox2.TabIndex = 9;
             this.textBox2.Text = "Enter your password";
-            this.textBox2.UseSystemPasswordChar = true;
             this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
             // 
             // textBox1
